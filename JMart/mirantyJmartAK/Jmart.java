@@ -72,11 +72,15 @@ public class Jmart
         int adminFee = (int) adminFee1;
         return adminFee;
     }
-    
+        
     /**
      * Constructor for objects of class Jmart
      */
     public static void main(String[] args) {
         
+    }
+    
+    public static Product create() {
+        return null;
     }
 }
