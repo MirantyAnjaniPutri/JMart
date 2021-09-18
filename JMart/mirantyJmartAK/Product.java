@@ -10,18 +10,25 @@ package mirantyJmartAK;
 
 public class Product
 {
-    private static int idCounter;
+    private static int idCounter = 0;
+    
     public int id;
     public String name;
     public int weight;
     public boolean conditionUsed;
-    PriceTag priceTag;
-    ProductCategory category;
-    ProductRating rating; 
-}
+    public PriceTag priceTag;
+    public ProductCategory category;
+    public ProductRating rating;
 
-/**
-public class Product(String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category) {
-
+    public Product(String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category) {
+        // main -> Product new Product = new Product(blablabla);
+         
+        this.id = idCounter++;
+        this.name = name;
+        this.weight = weight;
+        this.conditionUsed = conditionUsed;
+        this.priceTag = priceTag;
+        this.category = category;
+        this.rating = new ProductRating();
+    }
 }
-*/
