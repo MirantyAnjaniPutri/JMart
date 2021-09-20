@@ -25,7 +25,7 @@ public class ProductRating
     
     public double getAverage() {
         if (this.count == 0) {
-            System.out.println("Operasi divide by zero tidak bisa dilakukan.");
+            System.out.println("No rating.");
             return 0.0;
         }
         else{

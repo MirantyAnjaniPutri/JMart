@@ -21,4 +21,12 @@ public class Jmart
     public static Product create() {
         return new Product("PC Yunho Kawinan", 50, true, new PriceTag(350.0), ProductCategory.TOYS);
     }
+    
+    /* 
+    public static Coupon createCoupun() {
+        
+    }
+    
+    public static ShipmentDuration createShipmentDuration() P{
+    } */
 }
