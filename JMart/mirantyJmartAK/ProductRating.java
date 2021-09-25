@@ -19,24 +19,26 @@ public class ProductRating
     }
     
     public void insert (int rating) {
-        this.total += rating;
-        this.count++;
+        total += rating;
+        count++;
     }
     
     public double getAverage() {
-        if (this.count == 0) {
+        if (count == 0) {
             System.out.println("No rating.");
             return 0.0;
         }
         else{
-            return (double) this.total / this.count;
+            return (double) total / count;
         }
     }
     
+    //Getter variable Count
     public long getCount() {
         return this.count;
     }
     
+    //Getter variable Total
     public long getTotal() {
         return this.total;
     }

@@ -19,7 +19,7 @@ public class Jmart
     }
     
     public static Product create() {
-        return new Product("PC Yunho Kawinan", 50, true, new PriceTag(350.0), ProductCategory.TOYS);
+        return new Product(123, 456, "PC Yunho Kawinan", 50, true, new PriceTag(350.0), ProductCategory.TOYS);
     }
     
     
@@ -27,7 +27,7 @@ public class Jmart
         return null;
     }
     
-    public static ShipmentDuration createShipmentDuration() P{
+    public static ShipmentDuration createShipmentDuration() {
         return null;
     }
 }
