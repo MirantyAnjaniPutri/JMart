@@ -9,6 +9,9 @@ package mirantyJmartAK;
  */
 public class Coupon
 {
+    public static enum Type {
+        DISCOUNT, REBATE
+    }
     public static String name;
     public static int code;
     public static double cut;
@@ -30,7 +33,7 @@ public class Coupon
     }
     
     public boolean canApply(PriceTag priceTag) {
-        if (priceTag.getAdjustedPrice() >= this.minimum && this.used == false) {
+        if (priceTag.getAdjustedPrice() >= minimum && used == false) {
             return true;
         }
         else {
@@ -40,6 +43,18 @@ public class Coupon
     
     public double apply (PriceTag priceTag) {
         this.used = true;
-        return (double) priceTag.getAdjustedPrice() - this.cut;
+        if (type == Type.DISCOUNT) {
+            if (cut >= 100) {
+                return (double) priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() * 100/100); //potongan diskon 100%
+            }
+            else if (cut <= 0) {
+                return (double) priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() * 0/100); //tidak ada potongan harga
+            }
+            else {
+                return (double) priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() * cut/100); //potongan harga sesuai nilai cut
+            }
+        }
+        return (double) priceTag.getAdjustedPrice() - cut;
     }
+    
 }

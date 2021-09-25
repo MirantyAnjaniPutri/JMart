@@ -22,11 +22,12 @@ public class Jmart
         return new Product("PC Yunho Kawinan", 50, true, new PriceTag(350.0), ProductCategory.TOYS);
     }
     
-    /* 
+    
     public static Coupon createCoupun() {
-        
+        return null;
     }
     
     public static ShipmentDuration createShipmentDuration() P{
-    } */
+        return null;
+    }
 }
