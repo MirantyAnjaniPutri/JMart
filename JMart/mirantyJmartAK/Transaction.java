@@ -12,10 +12,10 @@ public class Transaction extends Recognizable
     public static enum Rating {
         NONE, BAD, NEUTRAL, GOOD;
     }
-    public String time = null;
+    public String time = "Time";
     public int buyerId;
     public int storeId;
-    public ProductRating rating;
+    public Rating rating = Rating.NONE;
     
     protected Transaction (int id, int buyerId, int storeId) {
         super(id);

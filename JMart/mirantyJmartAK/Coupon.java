@@ -7,7 +7,7 @@ package mirantyJmartAK;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Coupon
+public class Coupon extends Recognizable implements FileParser
 {
     public static enum Type {
         DISCOUNT, REBATE
@@ -19,7 +19,8 @@ public class Coupon
     public static double minimum;
     private boolean used;
     
-    public Coupon(String name, int code, Type type, double cut, double minimum) {
+    public Coupon(int id, String name, int code, Type type, double cut, double minimum) {
+        super(id);
         this.used = false;
         this.name = name;
         this.code = code;
@@ -57,4 +58,8 @@ public class Coupon
         return (double) priceTag.getAdjustedPrice() - cut;
     }
     
+    @Override
+    public boolean read (String blabla) {
+        return false;
+    }
 }
