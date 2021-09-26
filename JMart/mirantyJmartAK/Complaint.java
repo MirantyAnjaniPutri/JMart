@@ -6,24 +6,22 @@ package mirantyJmartAK;
  * @author Miranty Anjani
  * @version (a version number or a date)
  */
-public class Complaint
+public class Complaint extends Transaction implements FileParser
 {
     public int paymentId;
     public String desc;
 
-    /*
+    
     public Complaint(int id, Payment payment, String desc) {
-        this.paymentId = payment.id;
+        super(id, payment.storeId, payment.buyerId);
         this.desc = desc;
     }
 
     public Complaint(int id, int buyerId, int storeId, int paymentId, String desc) {
-        //super(id);
-        this.storeId = storeId;
+        super(id, buyerId, storeId);
         this.paymentId = paymentId;
-        this.buyerId = buyerId;
         this.desc = desc;        
-    }*/
+    }
 
     public boolean read (String content) {
         return false;

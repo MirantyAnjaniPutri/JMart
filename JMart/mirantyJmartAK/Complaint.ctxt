@@ -1,7 +1,10 @@
 #BlueJ class context
 comment0.target=Complaint
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Complaint\ here.\r\n\r\n\ @author\ Miranty\ Anjani\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=content
-comment1.target=boolean\ read(java.lang.String)
-comment1.text=\r\n\ \ \ \ public\ Complaint(int\ id,\ Payment\ payment,\ String\ desc)\ {\r\n\ \ \ \ \ \ \ \ this.paymentId\ \=\ payment.id;\r\n\ \ \ \ \ \ \ \ this.desc\ \=\ desc;\r\n\ \ \ \ }\r\n\r\n\ \ \ \ public\ Complaint(int\ id,\ int\ buyerId,\ int\ storeId,\ int\ paymentId,\ String\ desc)\ {\r\n\ \ \ \ \ \ \ \ //super(id);\r\n\ \ \ \ \ \ \ \ this.storeId\ \=\ storeId;\r\n\ \ \ \ \ \ \ \ this.paymentId\ \=\ paymentId;\r\n\ \ \ \ \ \ \ \ this.buyerId\ \=\ buyerId;\r\n\ \ \ \ \ \ \ \ this.desc\ \=\ desc;\ \ \ \ \ \ \ \ \r\n}
-numComments=2
+comment1.params=id\ payment\ desc
+comment1.target=Complaint(int,\ Payment,\ java.lang.String)
+comment2.params=id\ buyerId\ storeId\ paymentId\ desc
+comment2.target=Complaint(int,\ int,\ int,\ int,\ java.lang.String)
+comment3.params=content
+comment3.target=boolean\ read(java.lang.String)
+numComments=4
