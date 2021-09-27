@@ -10,15 +10,14 @@ package mirantyJmartAK;
 
 public class Product extends Recognizable implements FileParser
 {    
+    public int storeId;
     public String name;
     public int weight;
     public boolean conditionUsed;
     public PriceTag priceTag;
     public ProductCategory category;
     public ProductRating rating;
-    public int storeId;
 
-    
     public Product(int id, int storeId, String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category) {
         // main -> Product new Product = new Product(blablabla);
         super(id);
@@ -31,6 +30,7 @@ public class Product extends Recognizable implements FileParser
         this.rating = new ProductRating();
     }
     
+    /*
     public Product (int id, Store store, String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category) {
         super(id);
         this.storeId = store.id;
@@ -40,10 +40,14 @@ public class Product extends Recognizable implements FileParser
         this.priceTag = priceTag;
         this.category = category;
         this.rating = new ProductRating();
-    }
+    }*/
     
     @Override
     public boolean read (String blabla) {
         return false;
+    }
+    
+    public String toString() {
+        return ("name: Harry Potter \n Weight: 10");
     }
 }

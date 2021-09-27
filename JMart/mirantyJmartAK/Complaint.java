@@ -6,23 +6,18 @@ package mirantyJmartAK;
  * @author Miranty Anjani
  * @version (a version number or a date)
  */
-public class Complaint extends Transaction implements FileParser
+public class Complaint extends Recognizable implements FileParser
 {
-    public int paymentId;
+    public String date = "10 Oktober 2021";
     public String desc;
 
     
-    public Complaint(int id, Payment payment, String desc) {
-        super(id, payment.storeId, payment.buyerId);
+    public Complaint(int id, String desc) {
+        super(id);
         this.desc = desc;
     }
 
-    public Complaint(int id, int buyerId, int storeId, int paymentId, String desc) {
-        super(id, buyerId, storeId);
-        this.paymentId = paymentId;
-        this.desc = desc;        
-    }
-
+    @Override
     public boolean read (String content) {
         return false;
     }

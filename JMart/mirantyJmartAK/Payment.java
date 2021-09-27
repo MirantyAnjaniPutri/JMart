@@ -7,24 +7,28 @@ package mirantyJmartAK;
  * @author Miranty Anjani
  * @version (a version number or a date)
  */
-public class Payment extends Transaction implements FileParser
+public class Payment extends Invoice implements FileParser
 {
-    public int productId;
-    public ShipmentDuration shipmentDuration;
+    public int productCount;
+    public Shipment shipment;
     
-    public Payment (int id, int buyerId, Product product, ShipmentDuration shipmentDuration) {
-        super(id, buyerId, product.storeId);
-        this.productId = product.id;
-        this.shipmentDuration = shipmentDuration;
+    public Payment (int id, int buyerId, int productId, int productCount, Shipment shipment) {
+        super(id, buyerId, productId);
+        this.productCount = productCount;
+        this.shipment = shipment;
     }
     
-    public Payment(int id, int buyerId, int storeId, int productId, ShipmentDuration shipmentDuration) {
-        super(id, buyerId, storeId);
-        this.productId = productId;
-        this.shipmentDuration = shipmentDuration;
+    @Override
+    public double getTotalPay() {
+        return 0.0;
     }
     
-    public boolean read (String content) {
+    public boolean validate() {
         return false;
     }
+    
+    /*
+    public Invoice perform() {
+        return null;
+    }*/
 }
