@@ -10,11 +10,9 @@ package mirantyJmartAK;
 public interface FileParser
 {
     public boolean read (String content);
-    
-    public default Object write() {
+    default Object write() {
         return null;
     }
-    
     public static Object newInstance(String content) {
         return null;
     }

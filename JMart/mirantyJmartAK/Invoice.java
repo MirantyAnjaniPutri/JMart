@@ -1,5 +1,7 @@
 package mirantyJmartAK;
 
+import java.util.Date;
+import java.text.*;
 
 /**
  * Write a description of class Invoice here.
@@ -9,7 +11,7 @@ package mirantyJmartAK;
  */
 public abstract class Invoice extends Recognizable implements FileParser
 {
-    public String date = "10 Oktober 2021";
+    Date date;
     public int  buyerId;
     public int productId;
     public Rating rating;
@@ -25,6 +27,9 @@ public abstract class Invoice extends Recognizable implements FileParser
         super(id);
         this.buyerId = buyerId;
         this.productId = productId;
+        this.date = new Date();
+        rating = Rating.NONE;
+        status = Status.WAITING_CONFIRMATION;
     }
     
     public abstract double getTotalPay();
@@ -32,5 +37,9 @@ public abstract class Invoice extends Recognizable implements FileParser
     @Override
     public boolean read (String content) {
         return false;
+    }
+    
+    public Object write () {
+        return null;
     }
 }

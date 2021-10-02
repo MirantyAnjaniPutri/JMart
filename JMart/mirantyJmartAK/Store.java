@@ -1,5 +1,8 @@
 package mirantyJmartAK;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Write a description of class Store here.
@@ -9,6 +12,8 @@ package mirantyJmartAK;
  */
 public class Store extends Recognizable implements FileParser
 {
+    public static final String REGEX_PHONE = "^[\\d{9-12}]$";
+    public static final String REGEX_NAME = "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$";
     public String name;
     public String address;
     public String phoneNumber;
@@ -25,6 +30,26 @@ public class Store extends Recognizable implements FileParser
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+    
+    public String toString() {
+        return ("Name: " + name + "\nAddress: " + address + "\nphoneNumber: " + phoneNumber);
+    }
+    
+    public boolean validate() {
+        Pattern formatP = Pattern.compile(REGEX_PHONE);
+        Matcher cekPh = formatP.matcher(phoneNumber);
+        boolean cekPN = cekPh.find();
+        
+        Pattern formatN = Pattern.compile(REGEX_NAME);
+        Matcher cekName = formatN.matcher(name);
+        boolean cekNama = cekName.find();
+        
+        if (cekPN == true && cekNama == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     @Override

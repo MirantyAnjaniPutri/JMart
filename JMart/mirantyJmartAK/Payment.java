@@ -7,7 +7,7 @@ package mirantyJmartAK;
  * @author Miranty Anjani
  * @version (a version number or a date)
  */
-public class Payment extends Invoice implements FileParser
+public class Payment extends Invoice implements Transactor
 {
     public int productCount;
     public Shipment shipment;
@@ -27,8 +27,7 @@ public class Payment extends Invoice implements FileParser
         return false;
     }
     
-    /*
     public Invoice perform() {
         return null;
-    }*/
+    }
 }

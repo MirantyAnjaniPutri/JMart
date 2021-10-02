@@ -2,9 +2,7 @@
 comment0.target=Duration
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ ShipmentDuration\ here.\r\n\r\n\ @author\ Miranty\ Anjani\ Putri\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=bit
-comment1.target=Duration(int)
-comment2.params=args
-comment2.target=Duration(Duration[])
-comment3.params=reference
-comment3.target=boolean\ isDuration(Duration)
-numComments=4
+comment1.target=Duration(byte)
+comment2.params=reference
+comment2.target=java.lang.String\ getEstimatedArrival(java.util.Date)
+numComments=3

@@ -1,5 +1,8 @@
 package mirantyJmartAK;
 
+import java.util.Date;
+import java.text.*;
+
 /**
  * Write a description of class Complaint here.
  *
@@ -8,13 +11,14 @@ package mirantyJmartAK;
  */
 public class Complaint extends Recognizable implements FileParser
 {
-    public String date = "10 Oktober 2021";
+    Date date;
     public String desc;
 
     
     public Complaint(int id, String desc) {
         super(id);
         this.desc = desc;
+        this.date = new Date();
     }
 
     @Override

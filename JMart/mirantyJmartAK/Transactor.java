@@ -11,5 +11,5 @@ public interface Transactor
 {
     public abstract boolean validate();
     
-    public abstract Transactor perform();
+    public abstract Invoice perform();
 }
