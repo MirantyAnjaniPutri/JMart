@@ -26,7 +26,7 @@ public class Duration
     
     public String getEstimatedArrival(Date reference){
         Calendar temp = Calendar.getInstance();
-        if(this.bit == 1<<0|| this.bit == 1<<1){
+        if(this.bit == 1<<0 || this.bit == 1<<1){
             return ESTIMATION_FORMAT.format(reference.getTime());
         }else if(this.bit == 1<<2){
             temp.setTime(reference);
