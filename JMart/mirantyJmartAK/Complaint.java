@@ -1,5 +1,7 @@
 package mirantyJmartAK;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.*;
 
@@ -11,7 +13,7 @@ import java.text.*;
  */
 public class Complaint extends Recognizable implements FileParser
 {
-    Date date;
+    public Date date;
     public String desc;
 
     
@@ -24,5 +26,11 @@ public class Complaint extends Recognizable implements FileParser
     @Override
     public boolean read (String content) {
         return false;
+    }
+    
+    public String toString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
+        String strDate = formatter.format(date);
+        return ("Complaint {date= " + strDate + ", desc = '" + desc + "'}");
     }
 }

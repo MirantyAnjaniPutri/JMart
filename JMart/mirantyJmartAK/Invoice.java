@@ -1,5 +1,6 @@
 package mirantyJmartAK;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.*;
 
@@ -21,6 +22,13 @@ public abstract class Invoice extends Recognizable implements FileParser
     }
     public static enum Status {
         WAITING_CONFIRMATION, CANCELLED, ON_PROGRESS, ON_DELIVERY, COMPLAINT, FINISHED, FAILED;
+    }
+    public ArrayList<Record> history = new ArrayList<Record>();
+    
+    public class Record {
+        public Status status;
+        public Date date;
+        public String message;
     }
     
     protected Invoice (int id, int buyerId, int productId) {
