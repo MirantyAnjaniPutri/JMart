@@ -7,23 +7,36 @@ package mirantyJmartAK;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Recognizable
+public class Recognizable implements Comparable<Recognizable>
 {
     public final int id;
     
     protected Recognizable (int id) {
         this.id = id;
     }
-    
-    public boolean equals (Object recognizable) {
-        return (recognizable instanceof Recognizable) && ((Recognizable) recognizable).id == id;
+
+    public static <T> int setClosingId(Class<T> clazz, int id) {
+        return 0;
+    }
+
+    public static <T> int getClosingId(Class<T> clazz) {
+        return 0;
+    }
+
+    public boolean equals (Object other) {
+        return (other instanceof Recognizable) && ((Recognizable) other).id == id;
     }
     
-    public boolean equals (Recognizable recognizable) {
-        if (recognizable.id == id) {
-            return true;
-        } else {
-            return false;
-        }       
+    public boolean equals (Recognizable other) {
+        return other.id == id;
+    }
+
+    public int compareTo(Recognizable other) {
+        if (id == other.id) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 }
