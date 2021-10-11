@@ -10,7 +10,7 @@ import java.util.regex.*;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Account extends Recognizable implements FileParser
+public class Account extends Recognizable
 {
     public final String REGEX_EMAIL = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
     public final String REGEX_PASSWORD = "^\\(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
@@ -27,11 +27,6 @@ public class Account extends Recognizable implements FileParser
     
     public String toString() {
         return ("Name: " + name + "\nEmail: " + email + "\nPassword: " + password);
-    }
-    
-    @Override
-    public boolean read (String content) {
-        return false;
     }
     
     public boolean validate() {

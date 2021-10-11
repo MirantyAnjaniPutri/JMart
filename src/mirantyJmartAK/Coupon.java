@@ -7,7 +7,7 @@ package mirantyJmartAK;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Coupon extends Recognizable implements FileParser
+public class Coupon extends Recognizable
 {
     public static enum Type {
         DISCOUNT, REBATE
@@ -33,8 +33,8 @@ public class Coupon extends Recognizable implements FileParser
         return used;
     }
     
-    public boolean canApply(PriceTag priceTag) {
-        if (priceTag.getAdjustedPrice() >= minimum && used == false) {
+    public boolean canApply(Treasury treasury) {
+        if (treasury.getAdjustedPrice(treasury.price, treasury.discount) >= minimum && used == false) {
             return true;
         }
         else {
@@ -42,24 +42,19 @@ public class Coupon extends Recognizable implements FileParser
         }
     }
     
-    public double apply (PriceTag priceTag) {
+    public double apply (Treasury treasury) {
         this.used = true;
         if (type == Type.DISCOUNT) {
             if (cut >= 100) {
-                return (double) priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() * 100/100); //potongan diskon 100%
+                return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - (treasury.getAdjustedPrice(treasury.price, treasury.discount) * 100/100); //potongan diskon 100%
             }
             else if (cut <= 0) {
-                return (double) priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() * 0/100); //tidak ada potongan harga
+                return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - (treasury.getAdjustedPrice(treasury.price, treasury.discount) * 0/100); //tidak ada potongan harga
             }
             else {
-                return (double) priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() * cut/100); //potongan harga sesuai nilai cut
+                return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - (treasury.getAdjustedPrice(treasury.price, treasury.discount) * cut/100); //potongan harga sesuai nilai cut
             }
         }
-        return (double) priceTag.getAdjustedPrice() - cut;
-    }
-    
-    @Override
-    public boolean read (String blabla) {
-        return false;
+        return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - cut;
     }
 }

@@ -11,7 +11,7 @@ import java.text.*;
  * @author Miranty Anjani
  * @version (a version number or a date)
  */
-public class Complaint extends Recognizable implements FileParser
+public class Complaint extends Recognizable
 {
     public Date date;
     public String desc;
@@ -21,11 +21,6 @@ public class Complaint extends Recognizable implements FileParser
         super(id);
         this.desc = desc;
         this.date = new Date();
-    }
-
-    @Override
-    public boolean read (String content) {
-        return false;
     }
     
     public String toString() {

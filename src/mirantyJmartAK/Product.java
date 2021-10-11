@@ -8,18 +8,18 @@ package mirantyJmartAK;
  * @version (a version number or a date)
  */
 
-public class Product extends Recognizable implements FileParser
+public class Product extends Recognizable
 {    
     public int storeId;
     public String name;
     public int weight;
     public boolean conditionUsed;
-    public PriceTag priceTag;
+    public Treasury priceTag;
     public ProductCategory category;
     public ProductRating rating;
     public Shipment.MultiDuration multiDuration;
 
-    public Product(int id, int storeId, String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category, Shipment.MultiDuration multiDuration) {
+    public Product(int id, int storeId, String name, int weight, boolean conditionUsed, Treasury priceTag, ProductCategory category, Shipment.MultiDuration multiDuration) {
         // main -> Product new Product = new Product(blablabla);
         super(id);
         this.storeId = storeId;
@@ -46,10 +46,5 @@ public class Product extends Recognizable implements FileParser
     
     public String toString() {
         return ("Name: " + name + "\nWeight: " + weight + "\nconditionUsed: " + conditionUsed + "\npriceTag: " + priceTag + "\ncategory: " + category + "\nrating: " + rating + "\nstoreId: " + storeId);
-    }
-    
-    @Override
-    public boolean read (String blabla) {
-        return false;
     }
 }

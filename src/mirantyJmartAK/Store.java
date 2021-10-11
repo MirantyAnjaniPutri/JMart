@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Store extends Recognizable implements FileParser
+public class Store extends Recognizable
 {
-    public static final String REGEX_PHONE = "^[\\^[0-9]{10,12}$";
+    public static final String REGEX_PHONE = "^[\\^[0-9]{10,12}$]";
     public static final String REGEX_NAME = "^[[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}]$";
     public String name;
     public String address;
@@ -50,10 +50,5 @@ public class Store extends Recognizable implements FileParser
         } else {
             return false;
         }
-    }
-    
-    @Override
-    public boolean read (String content) {
-        return false;
     }
 }

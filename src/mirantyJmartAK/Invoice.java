@@ -10,7 +10,7 @@ import java.text.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class Invoice extends Recognizable implements FileParser
+public abstract class Invoice extends Recognizable
 {
     Date date;
     public int  buyerId;
@@ -41,13 +41,4 @@ public abstract class Invoice extends Recognizable implements FileParser
     }
     
     public abstract double getTotalPay();
-    
-    @Override
-    public boolean read (String content) {
-        return false;
-    }
-    
-    public Object write () {
-        return null;
-    }
 }
