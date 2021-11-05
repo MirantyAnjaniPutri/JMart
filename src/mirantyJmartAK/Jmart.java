@@ -1,33 +1,37 @@
 package mirantyJmartAK;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import com.google.gson.*;
 
-/**
- * Write a description of class Jmart here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 
-import java.util.Scanner;
 public class Jmart
 {        
-    /**
-     * Constructor for objects of class Jmart
-     */
-    public static void main(String[] args) {
-        
+    class Country
+    {
+        public String name;
+        public int population;
+        public List<String> listOfStates;
     }
-    
-    public static Product create() {
-        return null;
-    }
-    
-    
-    public static Coupon createCoupun() {
-        return null;
-    }
-    
-    public static Shipment createShipment() {
-        return null;
+
+    public static void main(String[] args)
+    {
+        String filepath = "C:/Users/Lenovo/JMart/src/lib/city.json";
+        Gson gson = new Gson();
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            Country input = gson.fromJson(br, Country.class);
+            System.out.println("Name: " + input.name);
+            System.out.println("Population: " + input.population);
+            System.out.println("States: ");
+            input.listOfStates.forEach(state -> System.out.println(state));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
