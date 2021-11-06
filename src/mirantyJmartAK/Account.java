@@ -10,16 +10,15 @@ import java.util.regex.*;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Account extends Recognizable
+public class Account extends Serializable
 {
     public final String REGEX_EMAIL = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
-    public final String REGEX_PASSWORD = "^\\(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
+    public final String REGEX_PASSWORD = "^\\?=.*[0-9]" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
     public String name;
     public String email;
     public String password;
     
-    public Account(int id, String name, String email, String password) {
-        super(id);
+    public Account(String name, String email, String password, int id) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -46,7 +45,7 @@ public class Account extends Recognizable
     }
 
     @Override
-    public int compareTo(Recognizable other) {
+    public int compareTo(Serializable other) {
         if (id == other.id) {
             return 1;
         }

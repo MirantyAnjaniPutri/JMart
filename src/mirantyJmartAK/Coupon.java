@@ -7,7 +7,7 @@ package mirantyJmartAK;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Coupon extends Recognizable
+public class Coupon extends Serializable
 {
     public static enum Type {
         DISCOUNT, REBATE
@@ -20,7 +20,6 @@ public class Coupon extends Recognizable
     private boolean used;
     
     public Coupon(int id, String name, int code, Type type, double cut, double minimum) {
-        super(id);
         this.used = false;
         this.name = name;
         this.code = code;

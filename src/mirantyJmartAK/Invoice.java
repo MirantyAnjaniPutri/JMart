@@ -10,7 +10,7 @@ import java.text.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class Invoice extends Recognizable
+public abstract class Invoice extends Serializable
 {
     Date date;
     public int  buyerId;
@@ -31,8 +31,7 @@ public abstract class Invoice extends Recognizable
         public String message;
     }
     
-    protected Invoice (int id, int buyerId, int productId) {
-        super(id);
+    protected Invoice() {
         this.buyerId = buyerId;
         this.productId = productId;
         this.date = new Date();

@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Store extends Recognizable
+public class Store extends Serializable
 {
     public static final String REGEX_PHONE = "^[\\^[0-9]{10,12}$]";
     public static final String REGEX_NAME = "^[[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}]$";
@@ -18,15 +18,7 @@ public class Store extends Recognizable
     public String address;
     public String phoneNumber;
     
-    public Store (int accountId, String name, String address, String phoneNumber) {
-        super(accountId);
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-    }
-    
-    public Store (Account account, String name, String address, String phoneNumber) {
-        super(account.id);
+    public Store (String name, String address, String phoneNumber, double balance) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;

@@ -8,7 +8,7 @@ package mirantyJmartAK;
  * @version (a version number or a date)
  */
 
-public class Product extends Recognizable
+public class Product extends Serializable
 {    
     public int storeId;
     public String name;
@@ -21,7 +21,6 @@ public class Product extends Recognizable
 
     public Product(int id, int storeId, String name, int weight, boolean conditionUsed, Treasury priceTag, ProductCategory category, Shipment.MultiDuration multiDuration) {
         // main -> Product new Product = new Product(blablabla);
-        super(id);
         this.storeId = storeId;
         this.name = name;
         this.weight = weight;
