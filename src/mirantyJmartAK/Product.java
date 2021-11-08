@@ -10,25 +10,26 @@ package mirantyJmartAK;
 
 public class Product extends Serializable
 {    
-    public int storeId;
+    public int accountId;
     public String name;
     public int weight;
     public boolean conditionUsed;
-    public Treasury priceTag;
+    public double price;
+    public double discount;
     public ProductCategory category;
     public ProductRating rating;
-    public Shipment.MultiDuration multiDuration;
+    public byte shipmentPlans;
 
-    public Product(int id, int storeId, String name, int weight, boolean conditionUsed, Treasury priceTag, ProductCategory category, Shipment.MultiDuration multiDuration) {
+    public Product(int accountId, String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans) {
         // main -> Product new Product = new Product(blablabla);
-        this.storeId = storeId;
         this.name = name;
         this.weight = weight;
         this.conditionUsed = conditionUsed;
-        this.priceTag = priceTag;
+        this.price = price;
+        this.discount = discount;
         this.category = category;
         this.rating = new ProductRating();
-        this.multiDuration = multiDuration;
+        this.shipmentPlans = shipmentPlans;
     }
     
     /*
@@ -44,6 +45,6 @@ public class Product extends Serializable
     }*/
     
     public String toString() {
-        return ("Name: " + name + "\nWeight: " + weight + "\nconditionUsed: " + conditionUsed + "\npriceTag: " + priceTag + "\ncategory: " + category + "\nrating: " + rating + "\nstoreId: " + storeId);
+        return ("Name: " + name + "\nWeight: " + weight + "\nconditionUsed: " + conditionUsed + "\nprice: " + price + "\ncategory: " + category + "\nrating: " + rating);
     }
 }
