@@ -11,25 +11,33 @@ public class Jmart
 {
     public static List<Product> filterByAccountId (List<Product> list, int accountId, int page, int pageSize) {
         List<Product> tempo = new ArrayList<Product>();
-        List<Product> originalList = list;
+        for (Product product : list) {
+            tempo.add(product);
+        }
         return null;
     }
 
     public static List<Product> filterByCategory (List<Product> list, ProductCategory category) {
         List<Product> tempo = new ArrayList<Product>();
-        List<Product> originalList = list;
+        for (Product product : list) {
+            tempo.add(product);
+        }
         return null;
     }
 
     public static List<Product> filterByName (List<Product> list, String search, int page, int pageSize) {
         List<Product> tempo = new ArrayList<Product>();
-        List<Product> originalList = list;
+        for (Product product : list) {
+            tempo.add(product);
+        }
         return null;
     }
 
     public static List<Product> filterByPrice (List<Product> list, double minPrice, double maxPrice) {
         List<Product> tempo = new ArrayList<Product>();
-        List<Product> originalList = list;
+        for (Product product : list) {
+            tempo.add(product);
+        }
         return null;
     }
 
@@ -49,7 +57,9 @@ public class Jmart
 
     private static List<Product> paginate (List<Product> list, int page, int pageSize, Predicate<Product> pred) {
         List<Product> tempo = new ArrayList<Product>();
-        List<Product> originalList = list;
+        for (Product product : list) {
+            tempo.add(product);
+        }
         return null;
     }
 
