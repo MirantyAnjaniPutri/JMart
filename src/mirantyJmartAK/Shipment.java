@@ -1,6 +1,8 @@
 package mirantyJmartAK;
 
 
+import java.text.SimpleDateFormat;
+
 /**
  * Write a description of class Shipment here.
  *
@@ -13,6 +15,7 @@ public class Shipment
     public int shipmentCost;
     public Duration duration;
     public String receipt;
+    public static final SimpleDateFormat ESTIMATION_FORMAT = new SimpleDateFormat("'Date Format'E, MM/dd/yyyy");
         
     //Inner Class ShipmentDuration --> Duration
     public static class Duration

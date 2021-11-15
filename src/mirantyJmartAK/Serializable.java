@@ -11,17 +11,18 @@ import java.util.List;
  */
 public class Serializable implements Comparable<Serializable>
 {
-    public final int id = 0;
+    public int id = 0;
     private static HashMap<Class<?>, Integer> mapCounter = new HashMap();
 
     protected Serializable () {
         Integer counter = mapCounter.get(getClass());
         counter = counter == null ? 0 : counter + 1;
+        mapCounter.put(getClass(), counter);
+        this.id = counter;
     }
 
     public static <T> int setClosingId(Class<T> clazz, int id) {
-        mapCounter.replace(clazz, id);
-        return 0;
+        return mapCounter.put(clazz, id);
     }
 
     public static <T> int getClosingId(Class<T> clazz) {
