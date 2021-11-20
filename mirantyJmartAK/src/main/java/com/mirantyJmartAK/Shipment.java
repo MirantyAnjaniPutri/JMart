@@ -53,7 +53,7 @@ public class Shipment
     }
     
     //Constructor
-    public Shipment(String addres, int shipmentCost, Duration duration, String receipt){
+    public Shipment(String address, int shipmentCost, Duration duration, String receipt){
         this.address = address;
         this.shipmentCost = shipmentCost;
         this.duration = duration;
