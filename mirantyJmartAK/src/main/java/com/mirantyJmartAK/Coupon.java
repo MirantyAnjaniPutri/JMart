@@ -1,6 +1,8 @@
 package com.mirantyJmartAK;
 
 
+import com.mirantyJmartAK.dbjson.Serializable;
+
 /**
  * Write a description of class Coupon here.
  *

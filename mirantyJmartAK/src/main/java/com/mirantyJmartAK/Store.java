@@ -1,5 +1,7 @@
 package com.mirantyJmartAK;
 
+import com.mirantyJmartAK.dbjson.Serializable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

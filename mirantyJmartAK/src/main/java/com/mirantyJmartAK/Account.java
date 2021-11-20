@@ -1,8 +1,10 @@
 package com.mirantyJmartAK;
 
+import com.mirantyJmartAK.controller.BasicGetController;
+import com.mirantyJmartAK.dbjson.Serializable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.*;
 
 /**
  * Write a description of class Account here.
@@ -10,20 +12,20 @@ import java.util.regex.*;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Account extends Serializable
+public class Account extends Serializable implements BasicGetController
 {
     public final String REGEX_EMAIL = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
     public final String REGEX_PASSWORD = "^\\?=.*[0-9]" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
     public String name;
-    public String email;
-    public String password;
+    public static String email;
+    public static String password;
     
     public Account(String name, String email, String password, int id) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
-    
+
     public String toString() {
         return ("Name: " + name + "\nEmail: " + email + "\nPassword: " + password);
     }
