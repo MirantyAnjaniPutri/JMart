@@ -44,5 +44,17 @@ public class PaymentController implements BasicGetController<Payment> {
         return new Payment(buyerId,productId,productCount,shipmentAddress);
     }
 
-    
+    public JsonTable<Payment> getJsonTable () {
+        return paymentTable;
+    }
+
+    @PostMapping("/{id}/submit")
+    boolean submit
+            (
+                    @RequestParam int id,
+                    @RequestParam String receipt
+            )
+    {
+        return true;
+    }
 }
