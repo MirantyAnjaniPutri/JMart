@@ -21,7 +21,7 @@ public class Coupon extends Serializable
     public static double minimum;
     private boolean used;
     
-    public Coupon(int id, String name, int code, Type type, double cut, double minimum) {
+    public Coupon(String name, int code, Type type, double cut, double minimum) {
         this.used = false;
         this.name = name;
         this.code = code;

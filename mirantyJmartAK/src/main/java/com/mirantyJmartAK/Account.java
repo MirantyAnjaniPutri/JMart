@@ -16,19 +16,22 @@ public class Account extends Serializable implements BasicGetController
 {
     public final String REGEX_EMAIL = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
     public final String REGEX_PASSWORD = "^\\?=.*[0-9]" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
+    public double balance;
     public String name;
     public static String email;
     public static String password;
+    public Store store;
     
-    public Account(String name, String email, String password, int id) {
+    public Account(String name, String email, String password, double balance) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.balance = balance;
     }
 
-    public String toString() {
+    /*public String toString() {
         return ("Name: " + name + "\nEmail: " + email + "\nPassword: " + password);
-    }
+    }*/
     
     public boolean validate() {
         Pattern formatE = Pattern.compile(REGEX_EMAIL);
@@ -43,16 +46,6 @@ public class Account extends Serializable implements BasicGetController
             return true;
         } else {
             return false;
-        }
-    }
-
-    @Override
-    public int compareTo(Serializable other) {
-        if (id == other.id) {
-            return 1;
-        }
-        else {
-            return 0;
         }
     }
 }

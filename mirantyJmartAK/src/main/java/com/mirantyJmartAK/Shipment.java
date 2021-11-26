@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 public class Shipment
 {
     public String address;
-    public int shipmentCost;
+    public int cost;
     public Duration duration;
     public String receipt;
     public static final SimpleDateFormat ESTIMATION_FORMAT = new SimpleDateFormat("'Date Format'E, MM/dd/yyyy");
@@ -53,10 +53,10 @@ public class Shipment
     }
     
     //Constructor
-    public Shipment(String address, int shipmentCost, Duration duration, String receipt){
+    public Shipment(String address, int cost, byte plan, String receipt){
         this.address = address;
-        this.shipmentCost = shipmentCost;
-        this.duration = duration;
+        this.cost = cost;
+        this.duration = new Duration(plan);
         this.receipt = receipt;
     }
 }

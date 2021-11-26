@@ -22,11 +22,6 @@ public class Payment extends Invoice
         this.shipment = shipment;
     }
 
-    public Payment(int buyerId, int productId, int productCount, String shipmentAddress) {
-        super(buyerId, productId);
-        this.productCount = productCount;
-    }
-
     public class Record {
         public Status status;
         public final Date date = new Date();

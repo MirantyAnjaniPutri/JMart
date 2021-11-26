@@ -18,7 +18,13 @@ public class Jmart {
     public static long WAITING_CONF_LIMIT_MS = 4;
 
     public static void main(String[] args) throws IOException {
-        SpringApplication.run(Jmart.class, args);
+        try {
+            SpringApplication.run(Jmart.class, args);
+        }
+        catch (Throwable throwable) {
+            System.out.println(throwable.toString());
+            throwable.printStackTrace();
+        }
     }
 
     public static boolean paymentTimekeeper(Payment payment) {

@@ -21,11 +21,11 @@ public abstract class Invoice extends Serializable
     public Status status;
     public ArrayList<Payment.Record> history = new ArrayList<Payment.Record>();
     public static enum Rating {
-        NONE, BAD, NEUTRAL, GOOD;
+        BAD, GOOD, NEUTRAL, NONE;
     }
 
     public enum Status {
-        WAITING_CONFIRMATION, CANCELLED, ON_PROGRESS, ON_DELIVERY, COMPLAINT, FINISHED, FAILED;
+        CANCELLED, COMPLAINT, FAILED, FINISHED, ON_DELIVERY, ON_PROGRESS, WAITING_CONFIRMATION;
     }
     
     protected Invoice(int buyerId, int productId) {

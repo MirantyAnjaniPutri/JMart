@@ -19,15 +19,17 @@ public class Store extends Serializable
     public String name;
     public String address;
     public String phoneNumber;
+    public double balance;
     
     public Store (String name, String address, String phoneNumber, double balance) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.balance = balance;
     }
     
     public String toString() {
-        return ("Name: " + name + "\nAddress: " + address + "\nphoneNumber: " + phoneNumber);
+        return ("Name: " + name + "\nAddress: " + address + "\nPhone Number: " + phoneNumber + "\nBalance: " + balance);
     }
     
     public boolean validate() {

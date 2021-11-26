@@ -4,7 +4,7 @@ import java.util.HashMap;
 public class Serializable implements Comparable<Serializable>
 {
     private static HashMap<Class<?>, Integer> mapCounter = new HashMap<>();
-    public static final int id;
+    public static int id;
 
     protected Serializable()
     {
