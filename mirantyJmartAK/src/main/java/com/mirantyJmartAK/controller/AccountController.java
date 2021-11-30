@@ -1,7 +1,6 @@
 package com.mirantyJmartAK.controller;
 
 import com.mirantyJmartAK.Account;
-import com.mirantyJmartAK.Coupon;
 import com.mirantyJmartAK.Store;
 import com.mirantyJmartAK.dbjson.JsonAutowired;
 import com.mirantyJmartAK.dbjson.JsonTable;
@@ -13,22 +12,22 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account> {
-    public static final String REGEX_EMAIL = "";
-    public static final String REGEX_PASSWORD = "";
-    public static final String REGEX_PATTERN_EMAIL = "";
-    public static final String REGEX_PATTERN_PASSWORD = "";
+    public static final String REGEX_EMAIL = "^\\w+([\\.&`~-]?\\w+)*@\\w+([\\.-]?\\w+)+$";
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d][^-\\s]{8,}$";
+    public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
+    public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
 
-    public static @JsonAutowired
-            (value = Account.class, filepath = "C:\\Users\\Lenovo\\OneDrive\\Documents\\randomPaymentList.json")
-    JsonTable<Account> accountTable;
+    @JsonAutowired (value = Account.class, filepath = "Account.json")
+    public static JsonTable<Account> accountTable;
 
-    public JsonTable<Account> getJsonTable () {
-        return accountTable;
-    }
+    @GetMapping
+    String index() { return "account page"; }
 
     @PostMapping("/login")
     Account login
@@ -37,15 +36,27 @@ public class AccountController implements BasicGetController<Account> {
                     @RequestParam String password
             )
     {
-        if (email.equals(Account.email) && password.equals(Account.password)) {
-            return null;
-        } else {
-            return null;
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < bytes.length; i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100,16).substring(1));
+            }
+            password = sb.toString();
         }
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        for (Account i : accountTable){
+            if(i.email.equals(email) && i.password.equals(password)){
+                return i;
+            }
+        }
+        return null;
     }
-
-    /*@GetMapping
-    String index() { return "account page"; }*/
 
     @PostMapping("/register")
     Account register
@@ -55,51 +66,76 @@ public class AccountController implements BasicGetController<Account> {
                     @RequestParam String password
             )
     {
+        boolean hasilEmail = REGEX_PATTERN_EMAIL.matcher(email).find();
+        boolean hasilPassword = REGEX_PATTERN_PASSWORD.matcher(password).find();
         try {
-
-            // Static getInstance method is called with hashing MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // digest() method is called to calculate message digest
-            //  of an input digest() return array of byte
-            byte[] messageDigest = md.digest(password.getBytes());
-
-            // Convert byte array into signum representation
-            BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value
-            String hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100,16).substring(1));
             }
-            password = hashtext;
+            password = sb.toString();
+        } catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
         }
-
-        // For specifying wrong message digest algorithms
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+        if(!name.isBlank() && hasilEmail && hasilPassword && !accountTable.stream().anyMatch(p -> p.email.equals(email))) {
+            Account account =  new Account(name, email, password, 0);
+            accountTable.add(account);
+            return account;
         }
-        return new Account(name, email, password, 0);
+        return null;
     }
 
     @PostMapping("/{id}/storeRegister")
     Store registerStore
             (
-                    /*
-                    @RequestParam id,
-                    @RequestParam name,
-                    @RequestParam address,
-                    @RequestParam phoneNumber
-                     */
+                    @RequestParam int id,
+                    @RequestParam String name,
+                    @RequestParam String address,
+                    @RequestParam String phoneNumber
             )
     {
+        for (Account data : accountTable) {
+            if (data.store == null && data.id == id) {
+                data.store = new Store(name, address, phoneNumber, 0);
+                return data.store;
+            }
+        }
         return null;
     }
 
-    boolean topUp (int id, double balance) {
-        return true;
+    @PostMapping("/{id}/topUp")
+    boolean topUp
+            (
+                    @RequestParam int id,
+                    @RequestParam double balance
+            )
+    {
+        for (Account data : accountTable) {
+            if (data.id == id) {
+                data.balance += balance;
+                return true;
+            }
+        }
+        return false;
     }
 
-    /*@GetMapping("/{id}")
-    String getById(@PathVariable int id) { return "account id " + id + " not found!"; }*/
+    @Override
+    @GetMapping("/{id}")
+    public Account getById(@PathVariable int id) {
+        return BasicGetController.super.getById(id);
+    }
+
+    @Override
+    public JsonTable getJsonTable() {
+        return accountTable;
+    }
+
+    @Override
+    public List getPage(int page, int pageSize) {
+        return BasicGetController.super.getPage(page, pageSize);
+    }
 }

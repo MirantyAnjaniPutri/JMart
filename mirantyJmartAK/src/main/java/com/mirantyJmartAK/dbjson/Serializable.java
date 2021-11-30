@@ -3,8 +3,8 @@ import java.util.HashMap;
 
 public class Serializable implements Comparable<Serializable>
 {
-    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<>();
-    public static int id;
+    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
+    public int id;
 
     protected Serializable()
     {

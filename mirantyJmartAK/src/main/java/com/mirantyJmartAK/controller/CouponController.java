@@ -1,38 +1,36 @@
 package com.mirantyJmartAK.controller;
 
+import com.mirantyJmartAK.Algorithm;
 import com.mirantyJmartAK.Coupon;
-import com.mirantyJmartAK.Product;
 import com.mirantyJmartAK.dbjson.JsonAutowired;
 import com.mirantyJmartAK.dbjson.JsonTable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/coupon")
 public class CouponController implements BasicGetController<Coupon> {
-    public static @JsonAutowired
-            (value = Coupon.class, filepath = "C:\\Users\\Lenovo\\OneDrive\\Documents\\randomPaymentList.json")
-    JsonTable<Coupon> couponTable;
+    @JsonAutowired (value = Coupon.class, filepath = "Coupon.json")
+    public static JsonTable<Coupon> couponTable;
 
     public JsonTable<Coupon> getJsonTable () {
         return couponTable;
     }
 
     @GetMapping("/getAvailable")
+    @ResponseBody
     List<Coupon> getAvailable
             (
                     @RequestParam int page,
                     @RequestParam int pageSize
             )
     {
-        return null;
+        return Algorithm.paginate(couponTable, page, pageSize, pred -> !pred.isUsed());
     }
 
     @GetMapping("/{id}/canApply")
+    @ResponseBody
     boolean canApply
             (
                     @RequestParam int id,
@@ -40,15 +38,41 @@ public class CouponController implements BasicGetController<Coupon> {
                     @RequestParam double discount
             )
     {
-        return true;
+        for (Coupon data : couponTable)
+        {
+            if (data.id == id) {
+                return data.canApply(price, discount);
+            }
+        }
+        return false;
     }
 
     @GetMapping("/{id}/isUsed")
+    @ResponseBody
     boolean isUsed
             (
                     @RequestParam int id
             )
     {
+        for (Coupon data : couponTable)
+        {
+            if (data.id == id)
+            {
+                return data.isUsed();
+            }
+        }
         return false;
+    }
+
+    @Override
+    public Coupon getById (int id)
+    {
+        return BasicGetController.super.getById(id);
+    }
+
+    @Override
+    public List getPage (int page, int pageSize)
+    {
+        return BasicGetController.super.getPage(page, pageSize);
     }
 }

@@ -1,8 +1,8 @@
 package com.mirantyJmartAK;
 
-import com.mirantyJmartAK.controller.BasicGetController;
 import com.mirantyJmartAK.dbjson.Serializable;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,14 +12,14 @@ import java.util.regex.Pattern;
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
  */
-public class Account extends Serializable implements BasicGetController
+public class Account extends Serializable
 {
-    public final String REGEX_EMAIL = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
-    public final String REGEX_PASSWORD = "^\\?=.*[0-9]" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=\\S+$).{8,20}$";
+    private static final String REGEX_EMAIL = "^\\w+([.&`~-]?\\w+)*@\\w+([.-]?\\w+)+$";
+    private static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d][^-\\s]{8,}$";
     public double balance;
     public String name;
-    public static String email;
-    public static String password;
+    public String email;
+    public String password;
     public Store store;
     
     public Account(String name, String email, String password, double balance) {
@@ -29,20 +29,18 @@ public class Account extends Serializable implements BasicGetController
         this.balance = balance;
     }
 
-    /*public String toString() {
-        return ("Name: " + name + "\nEmail: " + email + "\nPassword: " + password);
-    }*/
-    
     public boolean validate() {
         Pattern formatE = Pattern.compile(REGEX_EMAIL);
         Matcher cekEm = formatE.matcher(email);
         boolean cekMail = cekEm.find();
+        boolean hasilMail = cekMail ? true : false;
         
         Pattern formatP = Pattern.compile(REGEX_PASSWORD);
         Matcher cekPW = formatP.matcher(password);
         boolean cekPass = cekPW.find();
+        boolean hasilPass = cekPass ? true : false;
         
-        if (cekMail == true && cekPass == true) {
+        if (hasilMail == true && hasilPass == true) {
             return true;
         } else {
             return false;

@@ -19,18 +19,17 @@ public class Product extends Serializable
     public double price;
     public double discount;
     public ProductCategory category;
-    public ProductRating rating;
     public byte shipmentPlans;
 
     public Product(int accountId, String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans) {
         // main -> Product new Product = new Product(blablabla);
+        this.accountId = accountId;
         this.name = name;
         this.weight = weight;
         this.conditionUsed = conditionUsed;
         this.price = price;
         this.discount = discount;
         this.category = category;
-        this.rating = new ProductRating();
         this.shipmentPlans = shipmentPlans;
     }
     
@@ -47,6 +46,6 @@ public class Product extends Serializable
     }*/
     
     public String toString() {
-        return ("Name: " + name + "\nWeight: " + weight + "\nconditionUsed: " + conditionUsed + "\nprice: " + price + "\ncategory: " + category + "\nrating: " + rating);
+        return ("Name: " + name + "\nWeight: " + weight + "\nconditionUsed: " + conditionUsed + "\nprice: " + price + "\ncategory: " + category);
     }
 }

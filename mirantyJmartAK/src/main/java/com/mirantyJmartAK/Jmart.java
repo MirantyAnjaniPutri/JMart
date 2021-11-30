@@ -4,32 +4,28 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.mirantyJmartAK.dbjson.JsonDBEngine;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@SpringBootApplication
+/**
+ * @author Miranty Anjani Putri
+ */
 
+@SpringBootApplication
 public class Jmart {
     public static long DELIVERED_LIMIT_MS = 1;
     public static long ON_DELIVERY_LIMIT_MS = 2;
     public static long ON_PROGRESS_LIMIT_MS = 3;
     public static long WAITING_CONF_LIMIT_MS = 4;
 
-    public static void main(String[] args) throws IOException {
-        try {
-            SpringApplication.run(Jmart.class, args);
-        }
-        catch (Throwable throwable) {
-            System.out.println(throwable.toString());
-            throwable.printStackTrace();
-        }
+    public static void main(String[] args) {
+        JsonDBEngine.Run(Jmart.class);
+        SpringApplication.run(Jmart.class, args);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
     }
-
-    public static boolean paymentTimekeeper(Payment payment) {
-        return true;
-    }
+}
 
     /*public static List<Product> filterByAccountId (List<Product> list, int accountId, int page, int pageSize) {
         List<Product> tempo = new ArrayList<Product>();
@@ -95,4 +91,3 @@ public class Jmart {
         }
         return null;
     }*/
-}

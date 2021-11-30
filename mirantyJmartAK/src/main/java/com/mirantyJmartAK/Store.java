@@ -36,12 +36,14 @@ public class Store extends Serializable
         Pattern formatP = Pattern.compile(REGEX_PHONE);
         Matcher cekPh = formatP.matcher(phoneNumber);
         boolean cekPN = cekPh.find();
+        boolean hasilPN = cekPN ? true : false;
         
         Pattern formatN = Pattern.compile(REGEX_NAME);
         Matcher cekName = formatN.matcher(name);
         boolean cekNama = cekName.find();
+        boolean hasilNama = cekNama ? true : false;
         
-        if (cekPN == true && cekNama == true) {
+        if (hasilPN == true && hasilNama == true) {
             return true;
         } else {
             return false;

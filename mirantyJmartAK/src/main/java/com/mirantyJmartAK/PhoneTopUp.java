@@ -10,7 +10,7 @@ public class PhoneTopUp extends Invoice {
     }
 
     @Override
-    public double getTotalPay() {
-        return 0;
+    public double getTotalPay(Product product) {
+        return product.price * product.discount;
     }
  }

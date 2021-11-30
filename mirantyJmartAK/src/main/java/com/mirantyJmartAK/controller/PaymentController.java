@@ -1,35 +1,65 @@
 package com.mirantyJmartAK.controller;
 
 import com.mirantyJmartAK.ObjectPoolThread;
+import com.mirantyJmartAK.*;
 import com.mirantyJmartAK.Payment;
+import com.mirantyJmartAK.Product;
 import com.mirantyJmartAK.Shipment;
-import com.mirantyJmartAK.controller.BasicGetController;
 import com.mirantyJmartAK.dbjson.JsonAutowired;
 import com.mirantyJmartAK.dbjson.JsonTable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payment")
 public class PaymentController implements BasicGetController<Payment> {
-    @JsonAutowired(value = Payment.class, filepath = "C:\\Users\\Lenovo\\OneDrive\\Documents\\randomPaymentList.json") JsonTable<Payment> paymentTable;
-    public static final long DELIVERED_LIMIT_MS = 0;
-    public static final long ON_DELIVERY_LIMIT_MS = 1;
-    public static final long ON_PROGRESS_LIMIT_MS = 2;
-    public static final long WAITING_VONF_LIMIT_MS = 3;
-
-    public static ObjectPoolThread<Payment> poolThread;
+    @JsonAutowired(value = Payment.class, filepath = "Payment.json")
+    public static JsonTable<Payment> paymentTable;
+    ObjectPoolThread<Payment> poolThread;
+    public static final long DELIVERED_LIMIT_MS = 1;
+    public static final long ON_DELIVERY_LIMIT_MS = 2;
+    public static final long ON_PROGRESS_LIMIT_MS = 3;
+    public static final long WAITING_VONF_LIMIT_MS = 4;
 
     @PostMapping("/{id}/accept")
-    boolean accept (int id) {
-        return true;
+    @ResponseBody
+    boolean accept
+            (
+                    @RequestParam int id
+            )
+    {
+        for (Payment data : paymentTable)
+        {
+            if (data.id == id)
+            {
+                if(data.history.get(data.history.size()-1).status == Invoice.Status.WAITING_CONFIRMATION)
+                {
+                    data.history.add(new Payment.Record(Invoice.Status.ON_PROGRESS, null));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @PostMapping("/{id}/cancel")
-    boolean cancel (int id) {
-        return true;
+    @ResponseBody
+    boolean cancel
+            (
+                    @RequestParam int id
+            )
+    {
+        for (Payment data : paymentTable)
+        {
+            if(data.id == id)
+            {
+                if(data.history.get(data.history.size()-1).status == Invoice.Status.WAITING_CONFIRMATION)
+                {
+                    data.history.add(new Payment.Record(Invoice.Status.CANCELLED, null));
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @PostMapping("/create")
@@ -42,23 +72,56 @@ public class PaymentController implements BasicGetController<Payment> {
                     @RequestParam byte ShipmentPlan
             )
     {
-        //Shipment ship = new Shipment(shipmentAddress, 0, (Duration).ShipmentPlan,buyerId);
-        // Integer buyerId, Integer productId, Integer productCount, Shipment shipment
-        Shipment shipment = new Shipment(shipmentAddress, 0, ShipmentPlan, "Receipt");
-        return new Payment(buyerId, productId, productCount, shipment);
-    }
-
-    public JsonTable<Payment> getJsonTable () {
-        return paymentTable;
+        for (Account dataAccount : AccountController.accountTable)
+        {
+            if (dataAccount.id == buyerId)
+            {
+                for (Product data : ProductController.productTable)
+                {
+                    if (data.id == productId)
+                    {
+                        Payment payment = new Payment(buyerId, productId, productCount,new Shipment(shipmentAddress, 0, ShipmentPlan, null));
+                        if (dataAccount.balance >= payment.getTotalPay(data))
+                        {
+                            dataAccount.balance -= payment.getTotalPay(data);
+                            paymentTable.add(payment);
+                            return payment;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     @PostMapping("/{id}/submit")
+    @ResponseBody
     boolean submit
             (
                     @RequestParam int id,
                     @RequestParam String receipt
             )
     {
-        return true;
+        for (Payment data : paymentTable)
+        {
+            if(data.id == id)
+            {
+                if(data.history.get(data.history.size()-1).status == Invoice.Status.ON_PROGRESS)
+                {
+                    if (!receipt.isBlank())
+                    {
+                        data.shipment.receipt = receipt;
+                        data.history.add(new Payment.Record(Invoice.Status.ON_DELIVERY, null));
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public JsonTable<Payment> getJsonTable() {
+        return paymentTable;
     }
 }

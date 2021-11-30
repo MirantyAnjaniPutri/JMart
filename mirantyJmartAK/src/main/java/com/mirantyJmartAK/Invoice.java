@@ -19,7 +19,6 @@ public abstract class Invoice extends Serializable
     public int productId;
     public Rating rating;
     public Status status;
-    public ArrayList<Payment.Record> history = new ArrayList<Payment.Record>();
     public static enum Rating {
         BAD, GOOD, NEUTRAL, NONE;
     }
@@ -32,7 +31,7 @@ public abstract class Invoice extends Serializable
         this.buyerId = buyerId;
         this.productId = productId;
         this.complaintId = -1;
-        this.date = new Date();
+        this.date = java.util.Calendar.getInstance().getTime();
         rating = Rating.NONE;
         this.status = Status.WAITING_CONFIRMATION;
     }
@@ -43,5 +42,5 @@ public abstract class Invoice extends Serializable
         public String message;
     }
     
-    public abstract double getTotalPay();
+    public abstract double getTotalPay(Product product);
 }

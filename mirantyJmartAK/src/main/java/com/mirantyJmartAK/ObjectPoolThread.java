@@ -12,9 +12,6 @@ public class ObjectPoolThread <T> extends Thread {
     public ObjectPoolThread(String name, Function<T,Boolean> routine) {
         super(name);
         this.routine = routine;
-        Thread t = new Thread(this, name);
-        exitSignal = false;
-        t.start();
     }
 
     public ObjectPoolThread(Function<T,Boolean> routine) {
@@ -26,21 +23,31 @@ public class ObjectPoolThread <T> extends Thread {
     }
 
     public void exit() {
-        Thread.interrupted();
+        exitSignal = true;
     }
 
     public void run () {
-        Iterator<T> iterator = objectPool.iterator();
-        while (iterator.hasNext()) {
-            boolean check = routine.apply(iterator.next());
-            if (check == true) {
-                break;
-            }
-            else {
-                continue;
+        exitSignal = false;
+        synchronized (this) {
+            for (int i = 0; i < size(); i++) {
+                T object = objectPool.get(i);
+                boolean temporary = routine.apply(object);
+                if (temporary == false) {
+                    this.objectPool.add(object);
+                }
+                while (this.objectPool == null) {
+                    try {
+                        routine.wait();
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (exitSignal == true) {
+                    break;
+                }
             }
         }
-        exit();
     }
 
     public int size () {

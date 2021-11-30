@@ -22,19 +22,20 @@ public class Payment extends Invoice
         this.shipment = shipment;
     }
 
-    public class Record {
+    public static class Record {
         public Status status;
-        public final Date date = new Date();
+        public final Date date;
         public String message;
 
         public Record(Status status, String message) {
             this.status = status;
             this.message = message;
+            this.date = java.util.Calendar.getInstance().getTime();
         }
     }
 
     @Override
-    public double getTotalPay() {
-        return 0.0;
+    public double getTotalPay(Product product) {
+        return product.price * product.discount * productCount;
     }
 }

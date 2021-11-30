@@ -11,51 +11,46 @@ import com.mirantyJmartAK.dbjson.Serializable;
  */
 public class Coupon extends Serializable
 {
+
     public static enum Type {
         DISCOUNT, REBATE
     }
-    public static String name;
-    public static int code;
-    public static double cut;
-    public static Type type;
+    public final String name;
+    public final int code;
+    public final double cut;
+    public final Type type;
     public static double minimum;
-    private boolean used;
+    private static boolean used;
     
     public Coupon(String name, int code, Type type, double cut, double minimum) {
-        this.used = false;
+        used = false;
         this.name = name;
         this.code = code;
         this.type = type;
         this.cut = cut;
-        this.minimum = minimum;
+        Coupon.minimum = minimum;
     }
     
     public boolean isUsed () {
         return used;
     }
     
-    public boolean canApply(Treasury treasury) {
-        if (treasury.getAdjustedPrice(treasury.price, treasury.discount) >= minimum && used == false) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    public boolean canApply(double price, double discount) {
+        return (Treasury.getAdjustedPrice(price, discount) < minimum) && used == false;
     }
     
     public double apply (Treasury treasury) {
-        this.used = true;
-        if (type == Type.DISCOUNT) {
-            if (cut >= 100) {
-                return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - (treasury.getAdjustedPrice(treasury.price, treasury.discount) * 100/100); //potongan diskon 100%
-            }
-            else if (cut <= 0) {
-                return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - (treasury.getAdjustedPrice(treasury.price, treasury.discount) * 0/100); //tidak ada potongan harga
-            }
-            else {
-                return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - (treasury.getAdjustedPrice(treasury.price, treasury.discount) * cut/100); //potongan harga sesuai nilai cut
-            }
+        used = true;
+        double adjustedPrice = Treasury.getAdjustedPrice(treasury.price, treasury.discount);
+        switch (type)
+        {
+            case REBATE:
+                if (adjustedPrice <= cut) return 0.0;
+                return adjustedPrice - cut;
+            case DISCOUNT:
+                if (cut >= 100.0) return 0.0;
+                return adjustedPrice - adjustedPrice * (cut / 100);
         }
-        return (double) treasury.getAdjustedPrice(treasury.price, treasury.discount) - cut;
+        return 0.0;
     }
 }

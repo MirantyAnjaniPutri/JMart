@@ -10,12 +10,12 @@ package com.mirantyJmartAK;
 
 public class ProductRating
 {
-    private long total;
-    private long count;
+    private static long total;
+    private static long count;
     
     public ProductRating () {
-        this.total = 0;
-        this.count = 0;
+        ProductRating.total = 0;
+        ProductRating.count = 0;
     }
     
     public void insert (int rating) {
@@ -35,11 +35,11 @@ public class ProductRating
     
     //Getter variable Count
     public long getCount() {
-        return this.count;
+        return count;
     }
     
     //Getter variable Total
     public long getTotal() {
-        return this.total;
+        return total;
     }
 }
