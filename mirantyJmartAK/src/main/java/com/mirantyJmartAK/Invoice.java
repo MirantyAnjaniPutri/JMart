@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Write a description of class Invoice here.
+ * This class functions as an invoice.
+ * It will record the date, buyerId, complaintId,
+ * productId, rating, status of the order.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Miranty Anjani Putri
  */
 public abstract class Invoice extends Serializable
 {
@@ -26,7 +27,12 @@ public abstract class Invoice extends Serializable
     public enum Status {
         CANCELLED, COMPLAINT, FAILED, FINISHED, ON_DELIVERY, ON_PROGRESS, WAITING_CONFIRMATION;
     }
-    
+
+    /**
+     * Invoice constructor
+     * @param buyerId
+     * @param productId
+     */
     protected Invoice(int buyerId, int productId) {
         this.buyerId = buyerId;
         this.productId = productId;

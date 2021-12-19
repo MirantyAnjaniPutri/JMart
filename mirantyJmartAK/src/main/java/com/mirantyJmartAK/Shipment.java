@@ -6,10 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Write a description of class Shipment here.
+ * This is class for representing a shipment
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Miranty Anjani
  */
 public class Shipment
 {

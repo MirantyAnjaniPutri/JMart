@@ -2,10 +2,9 @@ package com.mirantyJmartAK;
 
 
 /**
- * Enumeration class ProductCategory - write a description of the enum class here
+ * Enumeration class ProductCategory - enum for the product category.
  *
  * @author Miranty Anjani Putri
- * @version (version number or date here)
  */
 
 public enum ProductCategory

@@ -7,10 +7,9 @@ import java.util.regex.Pattern;
 
 
 /**
- * Write a description of class Store here.
+ * This is class for representing a store.
  *
  * @author Miranty Anjani Putri
- * @version (a version number or a date)
  */
 public class Store extends Serializable
 {

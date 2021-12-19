@@ -6,10 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Write a description of class Complaint here.
+ * This class controls the complaints of the user.
+ * It stores the description, and the date when the complaint
+ * is made.
  *
  * @author Miranty Anjani
- * @version (a version number or a date)
  */
 public class Complaint extends Serializable
 {

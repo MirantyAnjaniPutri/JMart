@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Write a description of class Payment here.
+ * This is class for representing a payment.
  *
  * @author Miranty Anjani
- * @version (a version number or a date)
  */
+
 public class Payment extends Invoice
 {
     public int productCount;
     public Shipment shipment;
-    public ArrayList<Record> history = new ArrayList<Record>();
+    public ArrayList<Record> history;
 
     public Payment (Integer buyerId, Integer productId, Integer productCount, Shipment shipment) {
         super(buyerId, productId);
@@ -36,6 +36,6 @@ public class Payment extends Invoice
 
     @Override
     public double getTotalPay(Product product) {
-        return product.price * product.discount * productCount;
+        return (product.price-((product.discount/100)*product.price)*productCount) + shipment.cost;
     }
 }

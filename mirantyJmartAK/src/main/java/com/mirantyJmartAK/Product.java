@@ -4,10 +4,9 @@ package com.mirantyJmartAK;
 import com.mirantyJmartAK.dbjson.Serializable;
 
 /**
- * Write a description of class Product here.
+ * This class is about prodyct.
  *
  * @author Miranty Anjani Putri
- * @version (a version number or a date)
  */
 
 public class Product extends Serializable
@@ -22,7 +21,6 @@ public class Product extends Serializable
     public byte shipmentPlans;
 
     public Product(int accountId, String name, int weight, boolean conditionUsed, double price, double discount, ProductCategory category, byte shipmentPlans) {
-        // main -> Product new Product = new Product(blablabla);
         this.accountId = accountId;
         this.name = name;
         this.weight = weight;

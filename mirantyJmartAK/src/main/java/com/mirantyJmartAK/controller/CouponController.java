@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This class controls over the class Coupon.
+ * It can check whether a coupon is available to be used by the user,
+ * apply coupon for the user's purchase.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 @RestController
 @RequestMapping("/coupon")
 public class CouponController implements BasicGetController<Coupon> {

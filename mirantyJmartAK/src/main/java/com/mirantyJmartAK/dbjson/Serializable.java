@@ -1,6 +1,13 @@
 package com.mirantyJmartAK.dbjson;
 import java.util.HashMap;
 
+/**
+ * This class acts as the parent of most classes,
+ * account, product, coupon, etc.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 public class Serializable implements Comparable<Serializable>
 {
     private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();

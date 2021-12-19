@@ -9,6 +9,13 @@ import com.mirantyJmartAK.dbjson.JsonAutowired;
 import com.mirantyJmartAK.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This class controls over the class payment.
+ * It can accept, cancel, create, and submit payment.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 @RestController
 @RequestMapping("/payment")
 public class PaymentController implements BasicGetController<Payment> {
@@ -18,7 +25,7 @@ public class PaymentController implements BasicGetController<Payment> {
     public static final long DELIVERED_LIMIT_MS = 1;
     public static final long ON_DELIVERY_LIMIT_MS = 2;
     public static final long ON_PROGRESS_LIMIT_MS = 3;
-    public static final long WAITING_VONF_LIMIT_MS = 4;
+    public static final long WAITING_CONF_LIMIT_MS = 4;
 
     @PostMapping("/{id}/accept")
     @ResponseBody
@@ -63,7 +70,7 @@ public class PaymentController implements BasicGetController<Payment> {
     }
 
     @PostMapping("/create")
-    Payment create
+    public Payment create
             (
                     @RequestParam int buyerId,
                     @RequestParam int productId,
@@ -72,19 +79,13 @@ public class PaymentController implements BasicGetController<Payment> {
                     @RequestParam byte ShipmentPlan
             )
     {
-        for (Account dataAccount : AccountController.accountTable)
-        {
-            if (dataAccount.id == buyerId)
-            {
-                for (Product data : ProductController.productTable)
-                {
-                    if (data.id == productId)
-                    {
-                        Payment payment = new Payment(buyerId, productId, productCount,new Shipment(shipmentAddress, 0, ShipmentPlan, null));
-                        if (dataAccount.balance >= payment.getTotalPay(data))
-                        {
-                            dataAccount.balance -= payment.getTotalPay(data);
-                            paymentTable.add(payment);
+        for (Account data : AccountController.accountTable) {
+            if (data.id == buyerId) {
+                for (Product productData : ProductController.productTable) {
+                    if (productData.id == productId) {
+                        Payment payment = new Payment(buyerId, productId, productCount, new Shipment(shipmentAddress, 0, productData.shipmentPlans, null));
+                        if (data.balance >= payment.getTotalPay(productData)) {
+                            data.balance -= payment.getTotalPay(productData);
                             return payment;
                         }
                     }
@@ -118,6 +119,26 @@ public class PaymentController implements BasicGetController<Payment> {
             }
         }
         return false;
+    }
+
+    private static boolean timekeeper(Payment payment) {
+        Payment.Record record = payment.history.get(payment.history.size() - 1);
+        long elapsed = System.currentTimeMillis() - record.date.getTime();
+        if (record.status.equals(Invoice.Status.WAITING_CONFIRMATION) && (elapsed > WAITING_CONF_LIMIT_MS)) {
+            record.status = Invoice.Status.FAILED;
+            return true;
+        } else if (record.status.equals(Invoice.Status.ON_PROGRESS) && (elapsed > ON_PROGRESS_LIMIT_MS)) {
+            record.status = Invoice.Status.FAILED;
+            return true;
+        } else if (record.status.equals(Invoice.Status.ON_DELIVERY) && (elapsed > ON_PROGRESS_LIMIT_MS)) {
+            record.status = Invoice.Status.FINISHED;
+            return true;
+        } else if (record.status.equals(Invoice.Status.FINISHED) && (elapsed > DELIVERED_LIMIT_MS)) {
+            record.status = Invoice.Status.FINISHED;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

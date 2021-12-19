@@ -15,6 +15,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * This class controls over the class account.
+ * It can make a user login with their registered account,
+ * register a new account, and also stores the store data owned by the user.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 @RestController
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account> {

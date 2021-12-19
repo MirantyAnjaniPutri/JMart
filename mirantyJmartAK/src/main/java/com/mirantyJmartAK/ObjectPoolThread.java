@@ -4,6 +4,13 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.function.Function;
 
+/**
+ * This is class for representing Object Pool Thread.
+ * A compilation of threads gathered each with an object,
+ * waiting to be added.
+ * @author Miranty Anjani Putri
+ */
+
 public class ObjectPoolThread <T> extends Thread {
     private boolean exitSignal;
     private Vector<T> objectPool = new Vector<T>();

@@ -9,10 +9,12 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 /**
- * Write a description of class Account here.
+ * This class acts as parser for JsonTable,
+ * aka all of the classes' data will be stored in a Json file.
+ * Thus this class is created, so the file can be accessed, read,
+ * written, and edited.
  *
  * @author Miranty Anjani Putri
- * @version (a version number or a date)
  */
 
 public class JsonTable<T> extends Vector<T>

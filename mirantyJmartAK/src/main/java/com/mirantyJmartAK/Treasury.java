@@ -1,6 +1,8 @@
 package com.mirantyJmartAK;
 
 /**
+ * This is class for representing a treasury.
+ *
  * @author Miranty Anjani Putri
  */
 

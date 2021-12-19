@@ -11,6 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class controls over the class product.
+ * It can create a product, show products sold by a store, and
+ * get filtered product.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 @RestController
 @RequestMapping("/product")
 public class ProductController implements BasicGetController<Product> {
@@ -32,14 +40,14 @@ public class ProductController implements BasicGetController<Product> {
                     @RequestParam double price,
                     @RequestParam double discount,
                     @RequestParam ProductCategory category,
-                    @RequestParam byte ShipmentPlans
+                    @RequestParam byte shipmentPlans
             )
     {
         for (Product data : productTable)
         {
             if (data.accountId == accountId)
             {
-                Product product = new Product(accountId, name, weight, conditionUsed, price, discount, category, ShipmentPlans);
+                Product product = new Product(accountId, name, weight, conditionUsed, price, discount, category, shipmentPlans);
                 productTable.add(product);
                 return product;
             }

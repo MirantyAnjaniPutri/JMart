@@ -4,10 +4,11 @@ package com.mirantyJmartAK;
 import com.mirantyJmartAK.dbjson.Serializable;
 
 /**
- * Write a description of class Coupon here.
+ * This class functions as a coupon.
+ * It is made so user can apply the coupon,
+ * and receives more discount.
  *
  * @author Miranty Anjani Putri
- * @version (a version number or a date)
  */
 public class Coupon extends Serializable
 {

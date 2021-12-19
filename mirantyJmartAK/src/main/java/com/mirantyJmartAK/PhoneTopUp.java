@@ -1,5 +1,12 @@
 package com.mirantyJmartAK;
 
+/**
+ * This is class functions so user can top-up
+ * their balance. Making their shopping experience easier.
+ *
+ * @author Miranty Anjani
+ */
+
 public class PhoneTopUp extends Invoice {
     public String phoneNumber;
     public Invoice.Status status;

@@ -3,6 +3,12 @@ package com.mirantyJmartAK;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * This class controls the algorithm for the program.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 public class Algorithm {
     private Algorithm() {
 
@@ -310,7 +316,6 @@ public class Algorithm {
         return minimum;
     }
 
-    //----------------------- Collect ----------------------------------------------------
     public static<T> List<T> collect(T[] array, T value) {
         List<T> list = new ArrayList<T>();
         for (T each: array) {
@@ -374,7 +379,6 @@ public class Algorithm {
         return list;
     }
 
-    //----------------------- Paginate ----------------------------------------------------
     public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred){
         return Arrays.stream(array).filter(pred::predicate).skip(pageSize*page).limit(pageSize).collect(Collectors.toList());
     }

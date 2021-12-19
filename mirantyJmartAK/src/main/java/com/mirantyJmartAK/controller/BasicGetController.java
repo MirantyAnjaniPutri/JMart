@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * This class controls over any class.
+ * It can access a user by their id, get Json table for respective data, and
+ * get page for the display on the app.
+ *
+ * @author Miranty Anjani Putri
+ */
+
 @RestController
 public interface BasicGetController <T extends Serializable> {
     @GetMapping("/{id}")
@@ -24,5 +32,4 @@ public interface BasicGetController <T extends Serializable> {
         final JsonTable<T> table = getJsonTable();
         return Algorithm.paginate(table,page,pageSize,o->true);
     }
-
 }

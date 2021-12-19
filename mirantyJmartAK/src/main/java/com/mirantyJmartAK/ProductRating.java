@@ -2,7 +2,7 @@ package com.mirantyJmartAK;
 
 
 /**
- * Write a description of class ProductRating here.
+ * This class functions for rating a product.
  *
  * @author Miranty Anjani Putri
  * @version (a version number or a date)
@@ -17,7 +17,11 @@ public class ProductRating
         ProductRating.total = 0;
         ProductRating.count = 0;
     }
-    
+
+    /**
+     * Insert a rating of a product
+     * @param rating
+     */
     public void insert (int rating) {
         total += rating;
         count++;
